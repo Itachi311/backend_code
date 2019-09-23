@@ -14,7 +14,7 @@ logging.basicConfig(filename='log/app.log', filemode='a',format='%(asctime)s- %(
 logger = logging.getLogger(__name__)
 
 
-@app.route('/bank_details',methods=['POST'])
+@app.route('/bank_details',methods=['GET'])
 def bank_details_api():
 	
 	rqst_data=request.get_json()
@@ -48,7 +48,7 @@ def bank_details_api():
 
 
 
-@app.route('/branches_details',methods=['POST'])
+@app.route('/branches_details',methods=['GET'])
 def details_of_branches_api():
 	
 	rqst_data=request.get_json()
