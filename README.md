@@ -33,13 +33,15 @@ It contains two classes:
 2. ValidateApiToken which decode and verify the jwt token and send a response .
 
 ### service.py
-fetch bank details from postgres, given branch IFSC code 
-fetch all details of branches from postgreSQL, given bank name and a city
+1. fetch bank details from postgres, given branch IFSC code 
+2. fetch all details of branches from postgreSQL, given bank name and a city
 
 ### app.py
-API to fetch a bank details, given branch IFSC code
-API to fetch all details of branches, given bank name and a city 
+1. API to fetch a bank details, given branch IFSC code
+2. API to fetch all details of branches, given bank name and a city 
 
-
-
+# usage
+1. Install [postresql](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04)
+``` pip install -r requirements.txt```
+``` python app.py```
 
