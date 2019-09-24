@@ -45,3 +45,34 @@ It contains two classes:
 ``` pip install -r requirements.txt```
 ``` python app.py```
 
+# curl request:
+
+1. GET API to fetch a bank details, given branch IFSC code:
+``` curl -X GET \
+  https://limitless-crag-08495.herokuapp.com/bank_details \
+  -H 'Content-Type: application/json' \
+  -H 'Postman-Token: 54d466e4-6699-4fbf-aed7-1cd342e0fed8' \
+  -H 'cache-control: no-cache' \
+  -d '
+{
+   "Access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Ik5hcnV0byIsInNlY3JldCI6IkRlZmF1bHQxIiwiZXhwIjoxNTY5NTcyNjAwfQ.FrFU6nJ-QkppIY1bZMHUIhyoElwgLHYxDq8H0OEJeco",
+   "success":"True",
+  "ifsc":"ABHY0065005","offset":0,"limit":1
+}'
+``` 
+2. GET API to fetch all details of branches, given bank name and a city 
+```curl -X GET \
+  https://limitless-crag-08495.herokuapp.com/branches_details \
+  -H 'Content-Type: application/json' \
+  -H 'Postman-Token: 97933c9c-6b96-446e-8bfa-5cafb9ae9d1d' \
+  -H 'cache-control: no-cache' \
+  -d '{
+   "Access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Ik5hcnV0byIsInNlY3JldCI6IkRlZmF1bHQxIiwiZXhwIjoxNTY5NTcyNjAwfQ.FrFU6nJ-QkppIY1bZMHUIhyoElwgLHYxDq8H0OEJeco",
+   "success":"True",
+   "bank_name":"ALLAHABAD BANK",
+   "city":"KOLKATA",
+   "offset":"10",
+   "limit":"10"
+}' 
+```
+
