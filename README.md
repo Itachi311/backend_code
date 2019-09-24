@@ -48,7 +48,8 @@ It contains two classes:
 # curl request:
 
 1. GET API to fetch a bank details, given branch IFSC code:
-``` curl -X GET \
+```
+ curl -X GET \
   https://limitless-crag-08495.herokuapp.com/bank_details \
   -H 'Content-Type: application/json' \
   -H 'Postman-Token: 54d466e4-6699-4fbf-aed7-1cd342e0fed8' \
@@ -61,7 +62,8 @@ It contains two classes:
 }'
 ``` 
 2. GET API to fetch all details of branches, given bank name and a city 
-```curl -X GET \
+``` 
+curl -X GET \
   https://limitless-crag-08495.herokuapp.com/branches_details \
   -H 'Content-Type: application/json' \
   -H 'Postman-Token: 97933c9c-6b96-446e-8bfa-5cafb9ae9d1d' \
