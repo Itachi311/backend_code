@@ -1,7 +1,8 @@
 import jwt,datetime
+import os
 
-client_id='Naruto' #client_id
-client_secret='Default1' #client_secret
+client_id=os.environ.get('API_USER') #client_id
+client_secret=os.environ.get('API_PASSWORD') #client_secret
 
 
 class GenerateApiToken:
@@ -41,6 +42,7 @@ class ValidateApiToken:
 			# decoding the JWT Token
 			decoded_token=jwt.decode(self.headers, 'SECRET', algorithms=['HS256'])
 			# To verify data encode in GenerateApiToken == data encode in ValidateApiToken
+			print(decoded_token)
 			if decoded_token['id']==self.client_id and decoded_token['secret']==self.client_secret:
 				return {'success':True ,'Access':'Access Granted'}
 			else:

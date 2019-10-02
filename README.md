@@ -12,20 +12,11 @@
 5. APIs should be authenticated using a JWT key, with validity = 5 days
 
 ## Prerequisite:
-Click==7.0
-Flask==1.1.1
-itsdangerous==1.1.0
-Jinja2==2.10.1
-MarkupSafe==1.1.1
-psycopg2==2.8.3
-PyJWT==1.7.1
-Werkzeug==0.16.0
+
 ``` pip install -r requirements.txt```
-### database.ini 
-Contains informations for connecting postgresSQL i.e. host,database,user,password
 
 ### config.py 
-To configure postgreSQL
+configuration for postgresql
 
 ### jwt_token.py
 It contains two classes:
@@ -39,42 +30,39 @@ It contains two classes:
 ### app.py
 1. API to fetch a bank details, given branch IFSC code
 2. API to fetch all details of branches, given bank name and a city 
-
+3. Sending sensitive information like database credentials and JWT secret key from environment variables
+4. Search and pagination parameters are sent as query parameters
 # usage
 1. Install [postresql](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04)
-``` pip install -r requirements.txt```
-``` python app.py```
+2. ``` pip install -r requirements.txt```
+3. ``` python app.py```
 
 # curl request:
 
 1. GET API to fetch a bank details, given branch IFSC code:
 ```
  curl -X GET \
-  https://limitless-crag-08495.herokuapp.com/bank_details \
+  'https://limitless-crag-08495.herokuapp.com/bank_details?ifsc=ALLA0210032&offset=0&limit=1' \
   -H 'Content-Type: application/json' \
-  -H 'Postman-Token: 54d466e4-6699-4fbf-aed7-1cd342e0fed8' \
-  -H 'cache-control: no-cache' \
-  -d '
-{
-   "Access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Ik5hcnV0byIsInNlY3JldCI6IkRlZmF1bHQxIiwiZXhwIjoxNTY5NTcyNjAwfQ.FrFU6nJ-QkppIY1bZMHUIhyoElwgLHYxDq8H0OEJeco",
-   "success":"True",
-  "ifsc":"ABHY0065005","offset":0,"limit":1
-}'
-``` 
-2. GET API to fetch all details of branches, given bank name and a city 
-``` 
-curl -X GET \
-  https://limitless-crag-08495.herokuapp.com/branches_details \
-  -H 'Content-Type: application/json' \
-  -H 'Postman-Token: 97933c9c-6b96-446e-8bfa-5cafb9ae9d1d' \
+  -H 'Postman-Token: c1b8f4be-8bec-4ed2-b5eb-cbe54e06ada3' \
   -H 'cache-control: no-cache' \
   -d '{
-   "Access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Ik5hcnV0byIsInNlY3JldCI6IkRlZmF1bHQxIiwiZXhwIjoxNTY5NTcyNjAwfQ.FrFU6nJ-QkppIY1bZMHUIhyoElwgLHYxDq8H0OEJeco",
-   "success":"True",
-   "bank_name":"ALLAHABAD BANK",
-   "city":"KOLKATA",
-   "offset":"10",
-   "limit":"10"
-}' 
+   "Access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Ik5BUlVUTyIsInNlY3JldCI6IjEyMzRAIiwiZXhwIjoxNTcwNDc2MzAzfQ.32jXnBK6d8M_q9WU8ZbBqfKOfMSgWMCiiHuuW3G1W_Y",
+   "success":"True"
+ 
+}'
+``` 
+2. GET API to fetch all details of branches, given bank name and a city :
+``` 
+curl -X GET \
+  'https://limitless-crag-08495.herokuapp.com/branches_details?bank_name=ALLAHABAD%20BANK&city=KOLKATA&offset=0&limit=10' \
+  -H 'Content-Type: application/json' \
+  -H 'Postman-Token: 1cda54f8-c483-46a3-89bf-adffa90b5063' \
+  -H 'cache-control: no-cache' \
+  -d '{
+   "Access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Ik5BUlVUTyIsInNlY3JldCI6IjEyMzRAIiwiZXhwIjoxNTcwNDc2MzAzfQ.32jXnBK6d8M_q9WU8ZbBqfKOfMSgWMCiiHuuW3G1W_Y",
+   "success":"True"
+ 
+}'
 ```
 

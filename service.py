@@ -1,23 +1,26 @@
 import psycopg2
 from config import config
+import os
 import logging
 
 logging.basicConfig(filename='log/app.log', filemode='a',format='%(asctime)s- %(message)s',datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
 logger = logging.getLogger(__name__)
- 
+
+
 def connect(data):
     """ Connect to the PostgreSQL database server """
-    offset=data["offset"] if "offset" in data.keys() else 0
-    limit=data["limit"] if "limit" in data.keys() else 1
+    offset=int(data["offset"]) if "offset" in data.keys() else 0
+    limit=int(data["limit"]) if "limit" in data.keys() else 1
     conn = None
     try:
         # read connection parameters
         params = config()
+        
  
         # connect to the PostgreSQL server
         logger.info("Connecting to the PostgreSQL database...")
         conn = psycopg2.connect(**params)
-      
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
         # create a cursor
         cur = conn.cursor()
 
