@@ -106,10 +106,3 @@ if __name__ == '__main__':
     os.environ["DB_PASSWORD"]="myPassword"
     app.run(host='0.0.0.0', port=port ,debug=True)
     
-
- #    export API_USER="NARUTO"
-	# export API_PASSWORD="1234@"
-	# export HOST="localhost"
-	# export DATABASE="bank"
-	# export DB_USER="postgres"
-	# export DB_PASSWORD="myPassword"
