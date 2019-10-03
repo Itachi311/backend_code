@@ -58,10 +58,10 @@ curl -X GET \
 2. GET API to fetch all details of branches, given bank name and a city :
 ``` 
 curl -X GET \
-  'https://limitless-crag-08495.herokuapp.com/branches_details?bank_name=ALLAHABAD%20BANK&city=KOLKATA&offset=2&limit=2' \
+  'https://limitless-crag-08495.herokuapp.com/branches_details?bank_name=ALLAHABAD%20BANK&city=KOLKATA&offset=0&limit=15' \
   -H 'Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Ik5BUlVUTyIsInNlY3JldCI6IjEyMzRAIiwiZXhwIjoxNTcwNDc2MzAzfQ.32jXnBK6d8M_q9WU8ZbBqfKOfMSgWMCiiHuuW3G1W_Y' \
   -H 'Content-Type: application/json' \
-  -H 'Postman-Token: 9d4ed23f-b789-4bfb-86b0-1cac139517d1' \
+  -H 'Postman-Token: 0abfa51c-cb9f-496e-85ec-52cd61ab5382' \
   -H 'cache-control: no-cache'
 ```
 
