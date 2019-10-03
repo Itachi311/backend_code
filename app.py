@@ -15,25 +15,28 @@ logger = logging.getLogger(__name__)
 
 @app.route('/bank_details',methods=['GET'])
 def bank_details_api():
+
 	para_data={}
-	rqst_data=request.get_json()
-	para_data["ifsc"]=request.args['ifsc']
-	if "limit" and  "offset" in para_data.keys():
-		para_data["limit"]=request.args['limit']
-		para_data["offset"]=request.args['offset']
-	else:
-		pass
-	
 
-	
+	logger.info(request.headers)
+	logger.info(request.args)
 
-	if "Access_token" in rqst_data.keys():
-		headers=rqst_data["Access_token"]
+	if "Authorization" in request.headers.keys():
+		headers=request.headers['Authorization']
 		conf=ValidateApiToken(headers)
 		verify=conf.verify_token()
+	
 
 		if verify['Access']=="Access Granted":
 			logger.info(verify)
+			try:
+				para_data["ifsc"]=request.args['ifsc']
+				para_data["limit"]=request.args['limit'] 
+				para_data["offset"]=request.args['offset']
+			except Exception:
+				para_data["limit"]= 1
+				para_data["offset"]= 0
+			
 			db_connect=service.connect(para_data)
 			return json.dumps({'success':True,"Bank_Details":db_connect},default=str)
 
@@ -42,12 +45,12 @@ def bank_details_api():
 			return jsonify({'Error': "Invalid credentials"}),400
 
 		else:
-			logger.info(verify['Access'])
-			return jsonify({'Error': "Token Expired"}),400
+			logger.error(verify['Access'])
+			return jsonify({'Error': "Oops Token Expired"}),400
 
 	else:
-		logger.info("Invalid request")
-		return jsonify({'Error': "Invalid request"}),400
+		logger.error("Invalid Access_token or parameters")
+		return jsonify({'Error': "Invalid request or parameters"}),400
 
 
 
@@ -58,22 +61,27 @@ def bank_details_api():
 def details_of_branches_api():
 
 	para_data={}
-	rqst_data=request.get_json()
-	para_data["bank_name"]=request.args['bank_name']
-	para_data["city"]=request.args['city']
-	
-	para_data["limit"]=request.args['limit']
-	para_data["offset"]=request.args['offset']
+
+	logger.info(request.headers)
+	logger.info(request.args)
 
 	
-	if "Access_token" in rqst_data.keys():
-		rqst_data=request.get_json()
-		headers=rqst_data["Access_token"]
+	if "Authorization" in request.headers.keys():
+		headers=request.headers['Authorization']
 		conf=ValidateApiToken(headers)
 		verify=conf.verify_token()
 
 		if verify['Access']=="Access Granted":
 			logger.info(verify)
+			try:
+				para_data["bank_name"]=request.args['bank_name']
+				para_data["city"]=request.args['city']
+				para_data["limit"]=request.args['limit'] 
+				para_data["offset"]=request.args['offset']
+			except Exception:
+				para_data["limit"]= 10
+				para_data["offset"]= 0
+				
 			db_connect=service.connect(para_data)
 			return json.dumps({'success':True,"Details_of_Branches":db_connect},default=str)
 
@@ -82,10 +90,10 @@ def details_of_branches_api():
 			return jsonify({'Error': "Invalid credentials"}),400
 
 		else:
-			logger.info(verify['Access'])
-			return jsonify({'Error': "Token Expired"}),400
+			logger.error(verify['Access'])
+			return jsonify({'Error': "Oops Token Expired"}),400
 	else:
-		logger.info("Invalid request access_token not found")
+		logger.error("Invalid Access_token")
 		return jsonify({'Error': "Invalid request"}),400
 
 	
@@ -97,12 +105,13 @@ def details_of_branches_api():
 
 if __name__ == '__main__':
 	# Bind to PORT if defined, otherwise default to 5000.
-    port = int(os.environ.get('PORT', 5000))
-    os.environ["API_USER"]="NARUTO"
-    os.environ["API_PASSWORD"]="1234@"
-    os.environ["HOST"]="localhost"
-    os.environ["DATABASE"]="bank"
-    os.environ["DB_USER"]="postgres"
-    os.environ["DB_PASSWORD"]="myPassword"
-    app.run(host='0.0.0.0', port=port ,debug=True)
-    
+	port = int(os.environ.get('PORT', 5000))
+	os.environ["API_USER"]="NARUTO"
+	os.environ["API_PASSWORD"]="1234@"
+	os.environ["HOST"]="localhost"
+	os.environ["DATABASE"]="bank"
+	os.environ["DB_USER"]="postgres"
+	os.environ["DB_PASSWORD"]="myPassword"
+	app.run(host='0.0.0.0', port=port ,debug=True)
+	
+
