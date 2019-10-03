@@ -11,6 +11,5 @@ def config():
     db["user"]=os.environ.get('DB_USER')
     # get database password  from environment variable
     db["password"]=os.environ.get('DB_PASSWORD')
-    print(db)
 
     return db
