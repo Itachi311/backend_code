@@ -1,8 +1,5 @@
 # Backend_code for python using flask assingment
 
-<img src="https://www.fylehq.com/assets/images/logos/fylelogo.svg"
-     alt="Markdown Monster icon"
-     style="float: left; margin-right: 10px;" />
 
 ## Objective:
 1. use PostgreSQL as a backend database (you can get the data from [indian_banks](https://github.com/snarayanank2/indian_banks))
